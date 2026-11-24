@@ -44,7 +44,7 @@ app.put("/:id", async (req, res) => {
             const { nome, email } = req.body;
 
             const [result] = await pool.query(
-                "UPDATE usuarios SET nome = COALESCE(?, nome), email = COALSCE(?, email) WHERE id = ?", [nome || null, email || null, id]
+                "UPDATE usuarios SET nome = COALESCE(?, nome), email = COALESCE(?, email) WHERE id = ?", [nome || null, email || null, id]
             );
 
             if (!result.affectedRows) 
@@ -60,7 +60,7 @@ app.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params;
 
-        const [result] = await pool.query("DELETE FROM usarios WHERE id = ?", [id, ]);
+        const [result] = await pool.query("DELETE FROM usuarios WHERE id = ?", [id, ]);
         if (!result.affectedRows)
             return res.status(404).json({ erro: "Usuário não encontrado" });
 
